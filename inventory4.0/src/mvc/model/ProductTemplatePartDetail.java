@@ -1,8 +1,15 @@
 package mvc.model;
 
+import java.util.ArrayList;
+
+import mvc.model.ProductTemplate.Observer;
+
+
+
 public class ProductTemplatePartDetail {
 	
 	//FIELDS
+	private ArrayList<Observer> observers;
 	private long template_id;
 	private long part_id; 
 	private int quantity;
@@ -28,4 +35,28 @@ public class ProductTemplatePartDetail {
 	public int get_quantity(){
 		return this.quantity;
 	}
+	
+	//NOTIFICARION METHODS:
+		public interface Observer {
+			void ItemDeleted();
+			void UpdateObserver(ProductTemplatePartDetail productTemplatePartDetail);
+		}
+
+		
+		public void registerObserver(Observer o) {
+			observers.add(o);
+			updateObservers();
+		}
+		
+		
+		private void updateObservers() {
+			for(Observer o : observers) {
+				try {
+					o.UpdateObserver(this);
+				} catch(Exception e) {
+					//ignore
+				}
+			}
+		}
+		
 }

@@ -9,8 +9,10 @@ public class Inventory {
 
 	public PartList parts;
 	public ItemList items;
+	public ProductTemplateList ptl;
 	private partsTDG parts_tdg;
 	private itemsTDG items_tdg;
+	
 	
 	
 	public Inventory(){
@@ -220,6 +222,11 @@ public class Inventory {
 		return items.getItemAtIndex(index);
 	}
 	
+	
+	//PRODUCT TEMPLATE 
+	public void addProductTemplate(String product_number, String description){
+		
+	}
 	
 }
 
